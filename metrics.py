@@ -37,3 +37,14 @@ def mahalanobis(matrix):
         for j in range(i+1,len(matrix)):
             result[i][j] = np.dot(np.dot(np.matrix(C),(means[i]-means[j])), (means[i]-means[j]));
     return result;
+
+
+# Max value in matrix made list of list
+# bug fix, lists can be tensor
+def maxList(ls):
+    maxValue = ls[0][0];
+    for row in ls:
+        for cell in row:
+            if(maxValue < cell):
+                maxValue = cell;
+    return maxValue;

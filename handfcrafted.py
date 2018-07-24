@@ -49,3 +49,26 @@ def splitGroups(matrix, group):
         matrices[i] = np.array(matrices[i]);
     
     return matrices;
+
+# ainda nao foi testado
+def group2matrix(group):    
+    #max_group = np.array(group).max()[0];
+    max_group = maxList(group);
+    #min_group = np.array(groups).min()[0];    
+    matrix = np.zeros((len(group) , max_group+1));
+    
+    for i in range(len(group)):
+        if(len(group[i])>0):
+            for cell in group[i]:
+                matrix[i][cell] = 1;
+    
+    return matrix;
+
+def matrix2group(matrix):
+    group = [];
+    for i in range(matrix.shape[0]):
+        group.append([]);
+        for j in range(matrix.shape[1]):
+            if(matrix[i][j] > 0):
+                group[i].append(j);
+    return group;
