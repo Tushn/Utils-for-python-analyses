@@ -14,3 +14,14 @@ def savematrix(matrix, filename='matrix.csv', mode='w'):
             file.write(', '+str(matrix[i][j]));
         file.write('\n');
     file.close();
+
+# count differents for read CSV or  similar texts
+def count_dif(vector, delimiter='; '):
+    keyHash = {};
+    for row in vector:
+        for elem in row.split(delimiter):
+            if(elem in keyHash):
+                keyHash[elem] += 1;
+            else:
+                keyHash[elem] = 1;
+    return keyHash;
