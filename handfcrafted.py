@@ -5,7 +5,7 @@
 def count_dif(vector):
     keyHash = {};
     for row in vector:
-        for elem in row.split('; '):
+        for elem in vector:
             if(elem in keyHash):
                 keyHash[elem] += 1;
             else:
