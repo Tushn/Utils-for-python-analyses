@@ -50,7 +50,6 @@ def splitGroups(matrix, group):
     
     return matrices;
 
-# ainda nao foi testado
 def group2matrix(group):    
     #max_group = np.array(group).max()[0];
     max_group = maxList(group);
@@ -72,3 +71,14 @@ def matrix2group(matrix):
             if(matrix[i][j] > 0):
                 group[i].append(j);
     return group;
+
+
+# To choose what element in order
+def minn(vet, order=0):
+    indice = sorted(range(len(vet)),key=vet.__getitem__)[order];
+    return [vet[indice], indice];
+
+def maxnn(vet, order=0):
+    indice = sorted(range(len(vet)),key=vet.__getitem__)[-order];
+    return [vet[indice], indice];
+
