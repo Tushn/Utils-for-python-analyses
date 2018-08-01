@@ -48,3 +48,15 @@ def maxList(ls):
             if(maxValue < cell):
                 maxValue = cell;
     return maxValue;
+
+# Count elements without a pair value
+def count_without_pair(vet):
+    import numpy as np
+    keysHash = list(set(vet));
+    
+    vet = np.array(vet);
+    count = 0;
+    for keyH in keysHash:
+        if(np.where(vet==keyH)[0].shape[0]==1):
+            count += 1;
+    return count;
