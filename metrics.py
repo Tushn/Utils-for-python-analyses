@@ -1,7 +1,9 @@
 # ----------------------------------------------------
 # ----------------  Metrics  -------------------------
 # ----------------------------------------------------
-
+# Penrose distance is a measure between matrices, 
+# input is an array of matrices and return a matrix of
+# distance between them
 def penrose(matrix):
     tam = matrix[0].shape[1];
     result = np.zeros([len(matrix), len(matrix)]);
@@ -20,8 +22,10 @@ def penrose(matrix):
                 result[i][j] += pow(means[i][k]-means[j][k], 2)/(tam*V[k][k])
     return result;
 
-
-
+# Mahalanobis distance is a measure between matrices, 
+# input is an array of matrices and return a matrix of
+# distance between them
+# *Mahalanobis considered correlations as weight
 def mahalanobis(matrix):
     result = np.zeros([len(matrix), len(matrix)]);
     #np.cov(matrix.transpose())
