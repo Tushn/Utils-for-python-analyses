@@ -14,14 +14,25 @@ Created on Wed Jul 18 11:28:55 2018
 # If label is not defined data is generated based values of array
 # Else if label is defined they are changed automatically
 
-def barplot(vet, labels=''):
-    import numpy as np
+def barplot(vet, labels='', color='#1f77b4', title='', reverse=True):
     import matplotlib.pyplot as plt
-    keys = list(set(vet));
+    import numpy as np
     
-    counts = np.zeros([len(keys)]);
+    listvet = list(set(vet))
+    i = 0
+    while(i < len(listvet)):
+        if(isinstance(listvet[i], (float))):
+            del listvet[i]
+            break
+        i += 1
+#    if(isinstance(listvet[0], (float))):
+#        keys = sorted(listvet[1:], reverse=reverse)
+#    else:
+#        keys = sorted(listvet, reverse=reverse)
+    keys = sorted(listvet, reverse=reverse)
+    counts = np.zeros([len(keys)])
     for key in keys:
-        counts[keys.index(key)] = vet.count(key);
+        counts[keys.index(key)] = vet.count(key)
     
     if(labels!=''):
         temp = [];
@@ -29,17 +40,35 @@ def barplot(vet, labels=''):
             temp.append(labels[key]);
         keys = temp;
     
-    plt.barh(np.arange(len(keys)), list(counts) );
+    plt.barh(np.arange(len(keys)), list(counts), color=color )
     plt.yticks(np.arange(len(keys)), keys)    
-
+    plt.title(title)
+    plt.show()
+    
     return [keys, counts];
     
 # ----------------------------------------------------
 # -----------------  Correlation matrix  -------------
 # ----------------------------------------------------
-import numpy as np
-
 def correlation_matrix(df, labels=[], title='', labelx = [], labely = [], save=False, size = 6, scalecolor='default'):
+    '''
+        correlation_matrix(df, labels=[], title='', labelx = [], labely = [], save=False, size = 6, scalecolor='default')
+        
+        Inputs:
+        ----------------------------
+        df : numpy.array
+            enter with correlation matrix, you can get a this with:
+            >> import numpy as np
+            >> df = np.corrcoef(mat)
+        labels : list
+        title : string
+        labelx : list
+        labely : list
+        save : boolean
+        size : integer
+        scalecolor : string
+            
+    '''
     from matplotlib import pyplot as plt
     from matplotlib import cm as cm
     import numpy as np
@@ -69,7 +98,7 @@ def correlation_matrix(df, labels=[], title='', labelx = [], labely = [], save=F
         ax1.set_yticklabels(labels,fontsize=size);
     if(len(labelx)>0):
         T = np.arange(len(labelx))
-        ax1.set_yticks(T);
+        ax1.set_xticks(T);
         ax1.set_xticklabels(labelx,fontsize=size);
     if(len(labely)>0):
         T = np.arange(len(labely))
@@ -90,6 +119,3 @@ def correlation_matrix(df, labels=[], title='', labelx = [], labely = [], save=F
     plt.show()
     if(save):
         fig.savefig(title+'.png')
-        
-
-
